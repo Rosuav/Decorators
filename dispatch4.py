@@ -48,8 +48,10 @@ def mul(args):
 	print("Product: %d" % product)
 
 @cmd
-@login_required
 def spell(args):
+	if current_user != "rosuav":
+		print("You may not use that command.")
+		return
 	with open("/usr/share/dict/words") as dict:
 		words = {line.strip() for line in dict}
 	correct = 0
@@ -59,6 +61,25 @@ def spell(args):
 		else:
 			print("Misspelled: "+word)
 	print("%d correctly spelled words." % correct)
+
+@cmd
+def fire_missiles(args):
+	if current_user != "rosuav":
+		print("You may not use that command.")
+		return
+	print("BOOOOM! Missiles fired at latitude %s longitude %s" % (args[0], args[1]))
+
+@cmd
+def reboot_server(args):
+	if current_user != "rosuav":
+		print("You may not use that command.")
+		return
+	print("This is a very destructive command.")
+	confirm = input("To confirm, enter 'Yes, do as I say!': ")
+	if confirm != 'Yes, do as I say!':
+		print("Cancelled.")
+		return
+	print("Shutting down the server for reboot... nah, just kidding!")
 
 @cmd
 def quit(args):
