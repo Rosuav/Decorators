@@ -1,4 +1,4 @@
 Code repo for Thinkful workshop on decorators.
 
-The individual files represent different uses for decorators, more as examples
-than as actually useful use-cases.
+The individual files represent different stages of development of a small
+function-dispatch demo program, (ab)using function decorators on the way.
