@@ -11,9 +11,11 @@ def cmd(func):
 	dispatch[func.__name__] = func
 	return func
 
-@cmd
+#@cmd
 def add(args):
 	print("Sum: %d" % sum(int(arg) for arg in args))
+dispatch["add"] = add
+#cmd(add)
 
 @cmd
 def mul(args):
