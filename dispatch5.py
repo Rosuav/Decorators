@@ -39,6 +39,15 @@ def clock(func):
 		print("Time taken: %f" % tm)
 	return inner
 
+def memoize(func):
+	results = {}
+	@functools.wraps(func)
+	def inner(*args):
+		if args not in results:
+			results[args] = func(*args)
+		return results[args]
+	return inner
+
 @cmd
 def login(args):
 	global current_user
@@ -92,6 +101,7 @@ def reboot_server(args):
 	print("Shutting down the server for reboot... nah, just kidding!")
 
 # Helper for fib()
+# @memoize
 def stupid_fibonacci(n):
 	if n < 2: return n
 	return stupid_fibonacci(n-1) + stupid_fibonacci(n-2)
