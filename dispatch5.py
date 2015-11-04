@@ -100,7 +100,16 @@ def reboot_server(args):
 		return
 	print("Shutting down the server for reboot... nah, just kidding!")
 
+def call_count(func):
+	@functools.wraps(func)
+	def inner(n):
+		inner.count += 1
+		return func(n)
+	inner.count = 0
+	return inner
+
 # Helper for fib()
+@call_count
 # @memoize
 def stupid_fibonacci(n):
 	if n < 2: return n
@@ -109,8 +118,10 @@ def stupid_fibonacci(n):
 @cmd
 @clock
 def fib(args):
+	stupid_fibonacci.count = 0
 	n = int(args[0])
 	print("Fibonacci number %d is: %d" % (n, stupid_fibonacci(n)))
+	print("Took %d calls" % stupid_fibonacci.count)
 
 @cmd
 def quit(args):
