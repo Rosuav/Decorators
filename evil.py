@@ -14,7 +14,7 @@ print("Now we try to run that...")
 def monkeypatch(cls):
     orig = globals()[cls.__name__]
     print("Monkeypatch",id(cls),"into",id(orig))
-    for attr in cls.__dict__:
+    for attr in dir(cls):
         if not attr.startswith("_"):
             setattr(orig,attr,getattr(cls,attr))
     return orig
